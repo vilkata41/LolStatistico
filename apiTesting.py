@@ -19,3 +19,15 @@ def tips_with_champ(champ_name, region):
         return result
     except merakicommons.container.SearchError:
         return "Please, enter a valid champion name in League of Legends."
+
+
+def tips_against_champ(champ_name, region):
+    try:
+        champ_tips = cass.get_champion(champ_name, region).enemy_tips
+        result = ""
+        for tip in champ_tips:
+            result += tip
+            result += "\n"
+        return result
+    except merakicommons.container.SearchError:
+        return "Please, enter a valid champion name in League of Legends."
