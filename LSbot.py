@@ -1,4 +1,5 @@
 import os
+import cassiopeia as cass
 import discord
 from dotenv import load_dotenv
 import apiTesting
@@ -47,6 +48,13 @@ async def on_message(msg):
                 message = "Wrong number of arguments. Check 'ls help' to see the commands."
             else:
                 message = apiTesting.tips_against_champ(cmd[1], curr_region)
+            await msg.channel.send(message)
+        elif cmd[0] == "matchup_tips":
+            await msg.channel.send("Let me datamine. Give me one moment...")
+            if len(cmd) != 2:
+                message = "Wrong number of arguments. Check 'ls help' to see the commands."
+            else:
+                message = apiTesting.get_matchup_info(cmd[1], curr_region)
             await msg.channel.send(message)
         else:
             await msg.channel.send("Sorry, my parents didn't teach me how to answer to this. "
