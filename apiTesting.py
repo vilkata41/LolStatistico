@@ -16,6 +16,10 @@ def tips_with_champ(champ_name, region):
         for tip in champ_tips:
             result += tip
             result += "\n"
+
+        if result == "":
+            return "Sorry, this champ's information is missing for some reason..."
+
         return result
     except merakicommons.container.SearchError:
         return "Please, enter a valid champion name in League of Legends."
@@ -28,13 +32,17 @@ def tips_against_champ(champ_name, region):
         for tip in champ_tips:
             result += tip
             result += "\n"
+
+        if result == "":
+            return "Sorry, this champ's information is missing for some reason..."
+
         return result
     except merakicommons.container.SearchError:
         return "Please, enter a valid champion name in League of Legends."
 
 
 def get_match_tips(summoner_name, curr_region):
-    allowed_queues = ["NORMAL_5x5_DRAFT", "RANKED_FLEX_SR", "RANKED_FLEX_TT", "RANKED_SOLO_5x5"]
+    allowed_queues = ["TEAM_BUILDER_DRAFT_UNRANKED_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT", "RANKED_SOLO_5x5"]
     curr_match = cass.Summoner(name=summoner_name, region=curr_region).current_match
     if curr_match.queue.value not in allowed_queues:
         return "This queue type is not supported. By LolStatistico. The allowed queues are: " \

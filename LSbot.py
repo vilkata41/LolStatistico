@@ -62,7 +62,7 @@ async def on_message(msg):
             await msg.channel.send(message)
         else:
             await msg.channel.send("Sorry, my parents didn't teach me how to answer to this. "
-                                   "Try again.")
+                                   "Try again after consulting 'ls help'.")
 
 
 def parse(inpt):
